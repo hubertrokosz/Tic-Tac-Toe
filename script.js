@@ -70,7 +70,7 @@ const game = (function() {
 
                 tiles.forEach(item => {
 
-                    if (!item.listenedAdded) {
+                    if (!item.listenerAdded) {
                         item.addEventListener("click", () => {
         
                             const rowIndex = item.getAttribute("data-row");
