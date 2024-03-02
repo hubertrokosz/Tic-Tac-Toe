@@ -68,38 +68,39 @@ const game = (function() {
     
             let tiles = document.querySelectorAll(".tile");
 
-            if (!tiles.listenerAdded) {
                 tiles.forEach(item => {
-    
-                    item.addEventListener("click", () => {
+
+                    if (!item.listenedAdded) {
+                        item.addEventListener("click", () => {
         
-                        const rowIndex = item.getAttribute("data-row");
-                        const colIndex = item.getAttribute("data-col");
-        
-                        if (!(this.win == "x" || this.win == "o" || this.win == "draw")) {
-                            if (this.board[rowIndex][colIndex] != "x" && this.board[rowIndex][colIndex] != "o") {
-        
-                                if (this.currentTurn == "x") {
-                                    this.displayHeader(this.player1.name, this.player1.xo);
-                                    this.currentTurn = "o";
-                                }
+                            const rowIndex = item.getAttribute("data-row");
+                            const colIndex = item.getAttribute("data-col");
             
-                                else if (this.currentTurn == "o") {
-                                    this.displayHeader(this.player2.name, this.player2.xo);
-                                    this.currentTurn = "x";
-                                }
+                            if (!(this.win == "x" || this.win == "o" || this.win == "draw")) {
+                                if (this.board[rowIndex][colIndex] != "x" && this.board[rowIndex][colIndex] != "o") {
             
-                                this.board[rowIndex][colIndex] = this.currentTurn;
+                                    if (this.currentTurn == "x") {
+                                        this.displayHeader(this.player1.name, this.player1.xo);
+                                        this.currentTurn = "o";
+                                    }
+                
+                                    else if (this.currentTurn == "o") {
+                                        this.displayHeader(this.player2.name, this.player2.xo);
+                                        this.currentTurn = "x";
+                                    }
+                
+                                    this.board[rowIndex][colIndex] = this.currentTurn;
+                                }
                             }
-                        }
-        
-                        this.displayDOM();
-                        this.checkWin();
-        
-                    });
+            
+                            this.displayDOM();
+                            this.checkWin();
+            
+                        });
+                        item.listenerAdded = true;
+                    }
+
                 });
-                tiles.listenerAdded = true;
-            }
     
             let restart = document.getElementById("restart");
             restart.addEventListener("click", () => {
